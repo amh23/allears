@@ -1,6 +1,36 @@
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 const SignUpPage = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      username: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: Yup.object().shape({
+      email: Yup.string()
+        .email("Invalid email")
+        .required("An email address is required."),
+      username: Yup.string()
+        .min(8, "User name should have at least 8 characters")
+        .max(50, "User name should not more then 50 characters.")
+        .required("A user name is required."),
+      password: Yup.string()
+        .min(8, "Password length should be 8 minimum characters.")
+        .matches(/[A-Z]/, "Password mush contain one capital letter.")
+        .matches(/[a-z]/, "Password must contain lowercase letter.")
+        .matches(/[0-9]/, "Password must contain one number.")
+        .matches(/[@$!%*?&#]/, "Password must contain one speacial character.")
+        .required("Password is required."),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password")], "Passwords must be the same.")
+        .required("Confirm password is required."),
+    }),
+  });
   return (
-    <>
+    <form onSubmit={formik.handleSubmit}>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -25,10 +55,14 @@ const SignUpPage = () => {
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...formik.getFieldProps("email")}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2"
                 />
+                <div className="text-red-500 text-xs mt-2 font-semibold">
+                  {formik.touched.email && formik.errors.email ? (
+                    <div>{formik.errors.email}</div>
+                  ) : null}
+                </div>
               </div>
             </div>
 
@@ -47,9 +81,14 @@ const SignUpPage = () => {
                   id="username"
                   name="username"
                   type="text"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...formik.getFieldProps("username")}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2"
                 />
+              </div>
+              <div className="text-red-500 text-xs mt-2 font-semibold">
+                {formik.touched.username && formik.errors.username ? (
+                  <div>{formik.errors.username}</div>
+                ) : null}
               </div>
             </div>
 
@@ -68,9 +107,14 @@ const SignUpPage = () => {
                   name="password"
                   type="password"
                   autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...formik.getFieldProps("password")}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2"
                 />
+                <div className="text-red-500 text-xs mt-2 font-semibold">
+                  {formik.touched.password && formik.errors.password ? (
+                    <div>{formik.errors.password}</div>
+                  ) : null}
+                </div>
               </div>
             </div>
 
@@ -85,19 +129,26 @@ const SignUpPage = () => {
               </div>
               <div className="mt-2">
                 <input
-                  id="confirmpassword"
-                  name="confirmpassword"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   type="password"
                   autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...formik.getFieldProps("confirmPassword")}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2"
                 />
+              </div>
+              <div className="text-red-500 text-xs mt-2 font-semibold">
+                {formik.touched.confirmPassword &&
+                formik.errors.confirmPassword ? (
+                  <div>{formik.errors.confirmPassword}</div>
+                ) : null}
               </div>
             </div>
 
             <div>
               <button
                 type="submit"
+                disabled={formik.errors}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign Up
@@ -106,17 +157,17 @@ const SignUpPage = () => {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Already have an account!{" "}
+            Already have an account{" "}
             <a
-              href="#"
+              href="/#"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-             Log In
+              Create a new account
             </a>
           </p>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 
