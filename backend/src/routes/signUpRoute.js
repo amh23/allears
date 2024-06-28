@@ -7,10 +7,7 @@ export const signUpRoute = {
     path: '/api/signup',
     method: 'post',
     handler: async(req, res) => {
-        console.log('request body',req.body);
         const { email, password } = req.body;
-
-        console.log('email ',email)
 
         const db = getDbConnection('all-ears');
         const user = await db.collection('users').findOne({ email });
@@ -20,7 +17,6 @@ export const signUpRoute = {
         }
 
         const salt = uuid();
-        console.log('pepper string',process.env.PEPPER_STRING);
         const pepper = process.env.PEPPER_STRING;
 
         const passwordHash = await bcrypt.hash(salt + password + pepper, 10);
@@ -33,7 +29,7 @@ export const signUpRoute = {
         });
 
         const { insertedId } = result;
-        console.log('jwt secret ',process.env.JWT_SECRET)
+
         jwt.sign({
             id: insertedId,
             email,
