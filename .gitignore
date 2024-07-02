@@ -28,3 +28,5 @@ yarn-error.log*
 
 backend/package-lock.json
 frontend/package-lock.json
+
+.vscode
