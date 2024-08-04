@@ -61,8 +61,17 @@ const SignUpPage = () => {
   });
   return (
       <form onSubmit={formik.handleSubmit}>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-4 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <p className="my-3 text-center text-sm text-gray-500">
+            Already have an account{" "}
+            <a
+              href="/login"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
+              Log in
+            </a>
+          </p>
             <div>
               <div className="flex items-center justify-between">
                 <label
@@ -166,7 +175,7 @@ const SignUpPage = () => {
               </div>
             </div>
 
-            <div>
+            <div className="pt-2">
               <button
                 type="submit"
                 disabled={!formik.isValid || !formik.dirty || formik.isSubmitting  }
@@ -175,16 +184,6 @@ const SignUpPage = () => {
                 Sign Up
               </button>
             </div>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Already have an account{" "}
-            <a
-              href="/login"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Create a new account
-            </a>
-          </p>
         </div>
       </div>
     </form>
