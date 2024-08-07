@@ -8,7 +8,9 @@ const Sidebar = ({ menuItems = [] }) => {
             <div class="p-4 space-y-4">
                 {   menuItems.map(item => (
                     <div key={item.id}>
-                        <a href={item.link}  class="flex items-center space-x-4 p-2 hover:bg-indigo-200 rounded-md">{item.name}</a>
+                        <a href={item.link}  class="flex items-center space-x-4 p-2 hover:bg-blue-300 rounded-md">
+                        <i className={`${item.icon} text-xl text-blue-500 px-5`}></i>
+                        {item.name}</a>
                     </div>
                 ))}
             </div>
