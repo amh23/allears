@@ -10,7 +10,7 @@ const Navbar = ({ menuItems = [] }) => {
   };
   return (
     <nav className="fixed  w-full h-24  bg-white shadow-sm p-4  flex items-center justify-between flex-wrap z-50">
-      <div className="flex  items-center justify-start space-x-4 px-8">
+      <div className="flex  items-center justify-start space-x-4 md:px-8 sm:px-4">
         <img src="logo1.png" alt="Logo" className="h-8 w-8 md:h-10 md:w-10 " />
         <span className="font-semibold text-sm md:text-lg">All Ears</span>
       </div>
