@@ -12,7 +12,7 @@ const Navbar = ({ menuItems = [] }) => {
     <nav className="fixed  w-full h-24  bg-white shadow-sm p-4  flex items-center justify-between flex-wrap z-50">
       <div className="flex  items-center justify-start space-x-4 md:px-8 sm:px-4">
         <img src="logo1.png" alt="Logo" className="h-8 w-8 md:h-10 md:w-10 " />
-        <span className="font-semibold text-sm md:text-lg">All Ears</span>
+        <span className="font-semibold text-slate-600 text-sm md:text-lg">All Ears</span>
       </div>
         {width < 640 && !isMenuOpen &&  ( // Show hamburger menu on small screen
             <button
@@ -73,10 +73,10 @@ const Navbar = ({ menuItems = [] }) => {
         </div>
       </div>
       <div className="hidden sm:flex items-center space-x-4 mt-4 md:mt-0">
-        <div className="flex items-center justify-center h-8 w-8 md:h-10 md:w-10 bg-blue-500 text-white rounded-full">
+        <div className="flex items-center justify-center h-8 w-8 md:h-10 md:w-10 bg-blue-500 text-slate-600 rounded-full">
           <span className="text-sm md:text-base">U</span>
         </div>
-        <span className="font-semibold text-sm md:text-lg">User Name</span>
+        <span className="font-semibold text-sm text-slate-600 md:text-lg">User Name</span>
       </div>
     </nav>
   );
