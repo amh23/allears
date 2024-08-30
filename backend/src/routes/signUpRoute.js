@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid';
-import { getDbConnection  } from '../db.js';
+import { getDbConnection  } from '../util/db.js';
 
 export const signUpRoute = {
     path: '/api/signup',
