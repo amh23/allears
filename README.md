@@ -23,10 +23,10 @@ Follow the steps to set up the project locally on your machine
 
 Make sure you have the following installed on your machine:
 
-[git](https://git-scm.com/)
-[nodejs](https://nodejs.org/en)
-[npm](https://www.npmjs.com/)
-[mongodb](https://www.mongodb.com/download-center/community)
+[git](https://git-scm.com/)  
+[nodejs](https://nodejs.org/en)  
+[npm](https://www.npmjs.com/)  
+[mongodb](https://www.mongodb.com/download-center/community)  
 
 ### Installation
 
