@@ -30,28 +30,28 @@ Make sure you have the following installed on your machine:
 
 ### Installation
 
-`git clone https://github.com/amh23/allears.git `
-`cd allears`
+`git clone https://github.com/amh23/allears.git `  
+`cd allears`  
 
-Go to backend folder
-`cd backend `
-`npm install `
-To run the backend
+Go to backend folder  
+`cd backend `  
+`npm install `  
+To run the backend 
 `npm run dev`
 
-Go to frontend folder
-`cd frontend`
-`npm install`
-To run the frontend
-`npm start`
+Go to frontend folder 
+`cd frontend`  
+`npm install`  
+To run the frontend  
+`npm start`  
 
 ### Set up Environment Variables
 
 Create a new file named .env in the backend folder of your project and add the following content:
 
-`JWT_SECRET=
-PEPPER_STRING=
-PORT=
+`JWT_SECRET=  
+PEPPER_STRING=  
+PORT=  
 `
 
  
