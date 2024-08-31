@@ -33,16 +33,22 @@ Make sure you have the following installed on your machine:
 `git clone https://github.com/amh23/allears.git `  
 `cd allears`  
 
-Go to backend folder  
+Go to backend folder
+
 `cd backend `  
 `npm install `  
+
 To run the backend 
+
 `npm run dev`
 
-Go to frontend folder 
+Go to frontend folder  
+
 `cd frontend`  
 `npm install`  
+
 To run the frontend  
+
 `npm start`  
 
 ### Set up Environment Variables
