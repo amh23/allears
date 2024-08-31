@@ -56,7 +56,9 @@ To run the frontend
 Create a new file named .env in the backend folder of your project and add the following content:
 
 `JWT_SECRET=  
+
 PEPPER_STRING=  
+
 PORT=  
 `
 
