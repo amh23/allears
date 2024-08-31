@@ -14,3 +14,47 @@ This portfolio project is inspired by the Slido app, which allows users to inter
 - [ ] **Database:** MongoDB
 - [ ] **Real-Time Communication:** Socket.io
 - [ ] **Styling:** Tailwind CSS
+
+### Quick Start
+
+Follow the steps to set up the project locally on your machine
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+Link [git](https://git-scm.com/)
+Link [nodejs](https://nodejs.org/en)
+Link [npm](https://www.npmjs.com/)
+Link [mongodb](https://www.mongodb.com/download-center/community)
+
+### Installation
+
+`git clone https://github.com/amh23/allears.git `
+`cd allears`
+
+Go to backend folder
+`cd backend `
+`npm install `
+To run the backend
+`npm run dev`
+
+Go to frontend folder
+`cd frontend`
+`npm install`
+To run the frontend
+`npm start`
+
+### Set up Environment Variables
+
+Create a new file named .env in the backend folder of your project and add the following content:
+
+`JWT_SECRET=
+PEPPER_STRING=
+PORT=
+`
+
+ 
+
+
+
