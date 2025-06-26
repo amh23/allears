@@ -31,9 +31,9 @@ const Navbar = ({ menuItems = [] }) => {
             <button
               id="btnClose"
               onClick={toggleMenu}
-              className="absolute mt-0 pb-3 top-1 right-3"
+              className="absolute mt-0  pb-3 top-1 right-1"
             >
-              <i className="fa-solid fa-close text-xl"></i>
+              <i className="fa-solid fa-close text-l"></i>
             </button>
 
             {menuItems.map((item) => (

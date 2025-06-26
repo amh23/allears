@@ -38,6 +38,8 @@ Go to backend folder
 `cd backend `  
 `npm install `  
 
+Before the running project, if you are running in the local host, mongodb is run firstly. If you are using mongo atlas, edit in the mongodb connection string in the code.
+
 To run the backend 
 
 `npm run dev`
