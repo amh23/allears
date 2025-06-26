@@ -37,7 +37,7 @@ const SignUpPage = () => {
     }),
     onSubmit: async ( values, { setSubmitting, setFieldError  } ) => {
       try{
-        const response = await axois.post(`${config.backendUrl}/api/signup`, {
+        const response = await axois.post(`${config.backendUrl}/api/signup`,{ withCredentials: true}, {
           email: values.email,
           username: values.username,
           password: values.password,

@@ -12,11 +12,8 @@ const corsOptions = {
     optionsSuccessStatus: 204 // Some legacy browsers choke on 204
   };
   
-app.use(express.json());
 app.use(cors(corsOptions));
-
-
-
+app.use(express.json());
 
 routes.forEach(route => {
     app[route.method](route.path, route.handler);
