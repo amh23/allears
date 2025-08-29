@@ -8,18 +8,20 @@ export const signUpRoute = {
     method: 'post',
     handler: async(req, res) => {
         const { email, password } = req.body;
+        console.log('Email:', email);
 
         const db = getDbConnection('all-ears');
         const user = await db.collection('users').findOne({ email });
+        console.log('user.email:', user?.email);
 
         if(user){
             res.status(409).json({ message: 'User already exists.'});
         }
 
-        const salt = uuid();
+        const salt = await bcrypt.genSalt(10);
         const pepper = process.env.PEPPER_STRING;
 
-        const passwordHash = await bcrypt.hash(salt + password + pepper, 10);
+        const passwordHash = await bcrypt.hash(password + pepper, salt);
 
         const result = await db.collection('users').insertOne({
             email,
