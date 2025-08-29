@@ -8,11 +8,12 @@ export const signUpRoute = {
     method: 'post',
     handler: async(req, res) => {
         const { email, password } = req.body;
-        console.log('Email:', email);
 
-        const db = getDbConnection('all-ears');
+        const db = await getDbConnection(process.env.MONGODB_DB_NAME);
+        if(!db){
+            return res.status(500).json({ message: 'Database connection failed.' });
+        }
         const user = await db.collection('users').findOne({ email });
-        console.log('user.email:', user?.email);
 
         if(user){
             res.status(409).json({ message: 'User already exists.'});

@@ -1,6 +1,6 @@
 import express from 'express';
 import { routes } from './routes/index.js';
-import { initializeDbConnection } from './util/db.js';
+import { getDbConnection }  from './util/db.js';
 import cors from 'cors';
 
 const PORT = process.env.PORT || 8080;
@@ -19,7 +19,7 @@ routes.forEach(route => {
     app[route.method](route.path, route.handler);
 })
 
-initializeDbConnection()
+getDbConnection(process.env.MONGODB_DB_NAME)
     .then(() => {
         app.listen(PORT, () => {
             console.log(`Server is listening on port ${PORT}`)
