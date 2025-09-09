@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon -r dotenv/config ./src/server.js",
+    "start": "node -r dotenv/config ./src/server.js",
     "test": "jest --runInBand ./models"
   },
   "keywords": [],
