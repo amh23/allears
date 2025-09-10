@@ -24,16 +24,11 @@ const LogInPage = () => {
       try {
         const response = await axios.post(
           `${config.backendUrl}/api/login`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            data: { email: values.email, password: values.password },
-          },
-          { withCredentials: true }
+         { email: values.email, password: values.password },
+         { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
         );
 
         const { token } = response.data;
-        console.log(token);
         setToken(token);
         navigate("/dashboard");
       } catch (error) {
