@@ -7,16 +7,20 @@ export const logInRoute = {
     method: 'post',
     handler: async (req, res) => {
         const { email, password } = req.body;
-        const db = getDbConnection('all-ears');
+        
+        const db = await getDbConnection(process.env.MONGODB_DB_NAME);
+        if(!db){
+            return res.status(500).json({ message: 'Database connection failed.' });
+        }
         const user = await db.collection('users').findOne({ email });
 
         if(!user) return res.sendStatus(401);
 
-        const { _id: id, isVerified, passwordHash, salt } = user;
+        const { _id: id, passwordHash, isVerified, salt } = user;
 
         const pepper = process.env.PEPPER_STRING;
 
-        const isCorrect = await bcrypt.compare(salt + password + pepper, passwordHash);
+        const isCorrect = await bcrypt.compare(password + pepper, passwordHash);
 
         if(isCorrect){
             jwt.sign({ id,  isVerified, email },
