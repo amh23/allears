@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import useScreenSize from "../util/useScreenSize";
+import { useUser } from "../auth/useUser";
 import { useUserProfile } from "../auth/useUserProfile";
 import { handleLogout, getUserInitials } from "../auth/authUtils";
 
@@ -7,7 +8,17 @@ const Navbar = ({ menuItems = [] }) => {
   const { width } = useScreenSize();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  
+  // Use useUser for immediate authentication state from JWT token
+  const user = useUser();
+  
+  // Use useUserProfile for additional profile data from backend (optional)
   const { userProfile, loading } = useUserProfile();
+  
+  // Determine which user data to display (prefer userProfile, fallback to JWT user data)
+  const displayUser = userProfile || user;
+  const isLoggedIn = !!user; // User is logged in if JWT token exists and is valid
+  
   const userMenuRef = useRef(null);
 
   // Close user menu when clicking outside
@@ -66,17 +77,17 @@ const Navbar = ({ menuItems = [] }) => {
             </button>
 
             {/* User info in mobile menu */}
-            {userProfile && (
+            {isLoggedIn && displayUser && (
               <div className="px-4 py-3 border-b border-gray-300">
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center justify-center h-8 w-8 bg-blue-500 text-white rounded-full">
                     <span className="text-sm font-semibold">
-                      {getUserInitials(userProfile.name)}
+                      {getUserInitials(displayUser.name)}
                     </span>
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-800">{userProfile.name}</p>
-                    <p className="text-xs text-gray-500">{userProfile.email}</p>
+                    <p className="font-semibold text-gray-800">{displayUser.name}</p>
+                    <p className="text-xs text-gray-500">{displayUser.email}</p>
                   </div>
                 </div>
               </div>
@@ -96,7 +107,7 @@ const Navbar = ({ menuItems = [] }) => {
             ))}
             
             {/* Logout button in mobile menu */}
-            {userProfile && (
+            {isLoggedIn && (
               <div className="border-t border-gray-300 mt-2 pt-2">
                 <button
                   onClick={onLogout}
@@ -134,27 +145,27 @@ const Navbar = ({ menuItems = [] }) => {
       </div>
       {/* User Profile Section - Right side */}
       <div className="hidden sm:flex items-center space-x-4 mt-4 md:mt-0 relative" ref={userMenuRef}>
-        {loading ? (
-          // Loading state
+        {loading && !user ? (
+          // Loading state - only show when there's no JWT user data yet
           <div className="flex items-center space-x-2">
             <div className="animate-pulse bg-gray-300 rounded-full h-8 w-8 md:h-10 md:w-10"></div>
             <div className="animate-pulse bg-gray-300 rounded h-4 w-20"></div>
           </div>
-        ) : userProfile ? (
+        ) : isLoggedIn && displayUser ? (
           // User is logged in
           <div className="flex items-center space-x-3">
             {/* User Avatar with initials */}
             <div className="flex items-center justify-center h-8 w-8 md:h-10 md:w-10 bg-blue-500 text-white rounded-full cursor-pointer hover:bg-blue-600 transition-colors"
                  onClick={toggleUserMenu}>
               <span className="text-sm md:text-base font-semibold">
-                {getUserInitials(userProfile.name)}
+                {getUserInitials(displayUser.name)}
               </span>
             </div>
             
             {/* User Name */}
             <span className="font-semibold text-sm text-slate-600 md:text-lg cursor-pointer hover:text-slate-800 transition-colors"
                   onClick={toggleUserMenu}>
-              {userProfile.name}
+              {displayUser.name}
             </span>
             
             {/* Dropdown Arrow */}
@@ -167,8 +178,8 @@ const Navbar = ({ menuItems = [] }) => {
               <div className="absolute right-0 top-12 bg-white border border-gray-200 rounded-lg shadow-lg py-2 min-w-48 z-50">
                 {/* User Info Header */}
                 <div className="px-4 py-2 border-b border-gray-100">
-                  <p className="text-sm font-semibold text-gray-800">{userProfile.name}</p>
-                  <p className="text-xs text-gray-500">{userProfile.email}</p>
+                  <p className="text-sm font-semibold text-gray-800">{displayUser.name}</p>
+                  <p className="text-xs text-gray-500">{displayUser.email}</p>
                 </div>
                 
                 {/* Menu Items */}

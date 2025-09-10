@@ -6,7 +6,11 @@ export const useToken = () => {
     });
 
     const setToken = newToken => {
-        localStorage.setItem('token', newToken);
+        if (newToken) {
+            localStorage.setItem('token', newToken);
+        } else {
+            localStorage.removeItem('token');
+        }
         setTokenInternal(newToken);
     }
 
