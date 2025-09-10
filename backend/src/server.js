@@ -9,7 +9,8 @@ const corsOptions = {
     origin: process.env.FRONTEND_PROD_URL || process.env.FRONTEND_LOCAL_URL,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow these HTTP methods
     credentials: true, // Allow cookies
-    optionsSuccessStatus: 204 // Some legacy browsers choke on 204
+    optionsSuccessStatus: 204, // Some legacy browsers choke on 204
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allow these headers
   };
   
 app.use(cors(corsOptions));
