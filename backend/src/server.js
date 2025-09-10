@@ -6,7 +6,7 @@ import cors from 'cors';
 const PORT = process.env.PORT || 8080;
 const app = express();
 const corsOptions = {
-    origin: 'http://localhost:3000', // Allow only this origin
+    origin: process.env.FRONTEND_PROD_URL || process.env.FRONTEND_LOCAL_URL,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow these HTTP methods
     credentials: true, // Allow cookies
     optionsSuccessStatus: 204 // Some legacy browsers choke on 204
