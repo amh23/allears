@@ -24,8 +24,8 @@ const LogInPage = () => {
       try {
         const response = await axios.post(
           `${config.backendUrl}/api/login`,
-         { email: values.email, password: values.password },
-         { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
+          { email: values.email, password: values.password },
+          { withCredentials: true }
         );
 
         const { token } = response.data;
