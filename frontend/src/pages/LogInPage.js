@@ -42,6 +42,14 @@ const LogInPage = () => {
       }
     },
   });
+
+  // Handle Enter key press to trigger form submit
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      formik.handleSubmit(); // Submit the form when Enter is pressed
+    }
+  };
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -62,6 +70,7 @@ const LogInPage = () => {
                 name="email"
                 type="email"
                 {...formik.getFieldProps("email")}
+                onKeyDown={handleKeyDown} // Trigger form submit on Enter key press
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2"
               />
               <div className="text-red-500 text-xs mt-2 font-semibold">
@@ -96,6 +105,7 @@ const LogInPage = () => {
                 type="password"
                 autoComplete="current-password"
                 {...formik.getFieldProps("password")}
+                onKeyDown={handleKeyDown} // Trigger form submit on Enter key press
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2"
               />
               <div className="text-red-500 text-xs mt-2 font-semibold">
