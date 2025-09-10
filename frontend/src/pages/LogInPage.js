@@ -22,11 +22,16 @@ const LogInPage = () => {
     }),
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try{
-        const response = await axios.post(`${config.backendUrl}/api/login`,{
-          email: values.email,
-          password: values.password,
-        });
-        console.log(values.email,'/t',values.password);
+        const response = await axios.post(`${config.backendUrl}/api/login`,
+          {
+            email: values.email,
+            password: values.password,
+          },
+          {
+            headers: {'Content-Type': 'application/json'},
+            withCredentials: true
+          }
+        );
 
         const { token } = response.data;
         console.log(token)
