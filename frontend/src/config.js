@@ -1,6 +1,6 @@
 // src/config.js
 const config = {
-    backendUrl: 'http://127.0.0.1:8000',
+    backendUrl: process.env.REACT_APP_BACKEND_PROD_URL || process.env.REACT_APP_BACKEND_LOCAL_URL,
   };
   
   export default config;
