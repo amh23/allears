@@ -57,12 +57,18 @@ To run the frontend
 
 Create a new file named .env in the backend folder of your project and add the following content:
 
-`JWT_SECRET=  
-PEPPER_STRING=  
-PORT=  
 `
+JWT_SECRET=
+PEPPER_STRING=
+PORT=
+MONGODB_URI=
+MONGODB_DB_NAME=
+FRONTEND_LOCAL_URL=
+`
+Create a new file named .env in the frontend folder and add the following content:
 
- 
-
+`
+REACT_APP_BACKEND_LOCAL_URL=
+`
 
 
