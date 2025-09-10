@@ -8,7 +8,7 @@ export const getDbConnection =  async (dbName) => {
          return dbInstance; // Return the existing dbInstance
     }
    try{
-    const client = new MongoClient(process.env.MONGODB_URI);
+    const client = new MongoClient(process.env.MONGODB_LOCAL_URI);
     await client.connect();
     dbInstance = client.db(dbName); // Store the connection in dbInstance
     console.log('Connected to MongoDB');

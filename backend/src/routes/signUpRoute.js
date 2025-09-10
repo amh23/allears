@@ -7,7 +7,7 @@ export const signUpRoute = {
     path: '/api/signup',
     method: 'post',
     handler: async(req, res) => {
-        const { email, password } = req.body;
+        const { name, email, password } = req.body;
 
         const db = await getDbConnection(process.env.MONGODB_DB_NAME);
         if(!db){
@@ -16,7 +16,7 @@ export const signUpRoute = {
         const user = await db.collection('users').findOne({ email });
 
         if(user){
-            res.status(409).json({ message: 'User already exists.'});
+            return res.status(409).json({ message: 'User already exists.'});
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -25,6 +25,7 @@ export const signUpRoute = {
         const passwordHash = await bcrypt.hash(password + pepper, salt);
 
         const result = await db.collection('users').insertOne({
+            name,
             email,
             passwordHash,
             salt,
@@ -35,6 +36,7 @@ export const signUpRoute = {
 
         jwt.sign({
             id: insertedId,
+            name,
             email,
             isVerfied: false,
         },
